@@ -83,7 +83,8 @@ class _ExpenseFormState extends State<ExpenseForm> {
                   maxLength: 50,
                 ),
               ),
-              SizedBox(width: 20),
+              // SizedBox(width: 20),
+              Spacer(),
               Text(
                 formattedDate, style: TextStyle(fontSize: 15),
               ),
@@ -98,7 +99,6 @@ class _ExpenseFormState extends State<ExpenseForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DropdownButton<Category>(
-                
                 value: selectedCategory, 
                 underline: SizedBox(),
                 items: [

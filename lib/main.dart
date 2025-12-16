@@ -4,9 +4,19 @@ import 'ui/expenses/expenses_screen.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+    DevicePreview(
+      builder: (context) => MyApp()
+    )
+  );
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ExpensesScreen(),
-    ),
-  );
+    );
+  }
 }

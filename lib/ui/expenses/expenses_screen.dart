@@ -57,9 +57,31 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         backgroundColor: Colors.blue[700],
         title: const Text('Ronan-The-Best Expenses App'),
       ),
-      body: ListView.builder(
+      body: _expenses.isEmpty ?
+        Center(
+          child: Text('No expense found. Add one now', style: TextStyle(color: Colors.black, fontSize: 20)),
+        ) : ListView.builder(
         itemCount: _expenses.length,
-        itemBuilder: (context, index) => ExpenseItem(expense: _expenses[index]),
+        itemBuilder: (context, index) {
+          final item = _expenses[index];
+          return Dismissible(
+            key: Key(item.id), 
+            background: Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(Icons.delete, color: Colors.white, size: 30),
+            ),
+            onDismissed: (direction) {
+              setState(() {
+                _expenses.removeAt(index);
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${item.title} dismissed'))
+              );
+            },
+            child: ExpenseItem(expense: item),
+          );
+        },
       ),
     );
   }
