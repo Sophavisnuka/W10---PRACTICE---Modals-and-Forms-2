@@ -64,6 +64,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         itemCount: _expenses.length,
         itemBuilder: (context, index) {
           final item = _expenses[index];
+          final removeIndex = index;
           return Dismissible(
             key: Key(item.id), 
             background: Container(
@@ -76,7 +77,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 _expenses.removeAt(index);
               });
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('${item.title} dismissed'))
+                SnackBar(
+                  content: Text('${item.title} dismissed'),
+                  duration: Duration(seconds: 3),
+                  action: SnackBarAction(
+                    label: 'Undo', 
+                    onPressed: () {
+                      setState(() {
+                        _expenses.insert(removeIndex, item);
+                      });
+                    }
+                  ),
+                )
               );
             },
             child: ExpenseItem(expense: item),

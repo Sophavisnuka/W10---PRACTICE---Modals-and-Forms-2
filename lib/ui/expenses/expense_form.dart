@@ -25,8 +25,24 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
   void onCreate() {
     //  1 Build an expense
-    String  title = _titleController.text;
+    String title = _titleController.text;
     double amount = double.tryParse(_amountController.text) ?? 0;
+    if (title.isEmpty) {
+      showDialog(
+        context: context, 
+        builder: (context) => AlertDialog(
+          title: Text('Invalid input'),
+          content: Text('Please input title and amount'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(), 
+              child: Text('Back')
+            ),
+          ],
+        )
+      );
+      return;
+    }
     // // ignore: unused_local_variable
     Expense newExpense = Expense(
       title: title, 
@@ -52,6 +68,16 @@ class _ExpenseFormState extends State<ExpenseForm> {
       selectedDate = pickDate;
     });
   }
+  // Future<void> dialog(BuildContext context) async {
+  //   return showDialog(
+  //     context: context, 
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+
+  //       );
+  //     }
+  //   );
+  // }
   String get formattedDate {
     if (selectedDate == null) {
       return 'No date selected';
