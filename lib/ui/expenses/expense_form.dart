@@ -68,16 +68,6 @@ class _ExpenseFormState extends State<ExpenseForm> {
       selectedDate = pickDate;
     });
   }
-  // Future<void> dialog(BuildContext context) async {
-  //   return showDialog(
-  //     context: context, 
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-
-  //       );
-  //     }
-  //   );
-  // }
   String get formattedDate {
     if (selectedDate == null) {
       return 'No date selected';
@@ -109,7 +99,6 @@ class _ExpenseFormState extends State<ExpenseForm> {
                   maxLength: 50,
                 ),
               ),
-              // SizedBox(width: 20),
               Spacer(),
               Text(
                 formattedDate, style: TextStyle(fontSize: 15),

@@ -29,13 +29,16 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   ];
 
   void onAddClicked(BuildContext context) async {
-    final newExpenseItem = await showModalBottomSheet<Expense>(
-      isScrollControlled: false,
-      context: context,
-      builder: (c) => Center(child: ExpenseForm()),
-    );
-
+    // final newExpenseItem = await showModalBottomSheet<Expense>(
+    //   isScrollControlled: false,
+    //   context: context,
+    //   builder: (c) => Center(child: ExpenseForm()),
+    // );
     // TODO YOUR CODE HERE
+    final newExpenseItem = await Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => ExpenseForm())
+    );
     if(newExpenseItem != null) {
       setState(() {
         _expenses.add(newExpenseItem);
